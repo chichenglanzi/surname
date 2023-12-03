@@ -1,0 +1,44 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>chichenglanzi~姓氏分组</title>  
+    <script>  
+        function groupBySurname() {  
+            const input = document.getElementById('names-input').value;  
+            const names = input.split(',');  
+            const groupedNames = {};  
+  
+            names.forEach(name => {  
+                const surname = name.charAt(0); // 定义姓氏 
+                if (!groupedNames[surname]) {  
+                    groupedNames[surname] = [];  
+                }  
+                groupedNames[surname].push(name);  
+            });  
+  
+            const outputElement = document.getElementById('output');  
+            outputElement.innerHTML = '';  
+  
+            for (const surname in groupedNames) {  
+                const namesList = groupedNames[surname];  
+                const listElement = document.createElement('ul');  
+                listElement.innerHTML = `<h3>${surname}</h3>`;  
+                namesList.forEach(name => {  
+                    const listItem = document.createElement('li');  
+                    listItem.textContent = name;  
+                    listElement.appendChild(listItem);  
+                });  
+                outputElement.appendChild(listElement);  
+            }  
+        }  
+    </script>  
+</head>  
+<body>  
+    <h1>chichenglanzi~姓氏分组</h1>  
+    <input type="text" id="names-input" placeholder="请输入一组用逗号分隔的中文姓名">  
+    <button onclick="groupBySurname()">分组并输出</button>  
+    <div id="output"></div>  
+</body>  
+</html>
